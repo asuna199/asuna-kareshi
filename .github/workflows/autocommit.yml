@@ -19,8 +19,8 @@ jobs:
           echo $d > LAST_UPDATED
       - name: Commit changes
         run: |
-          git config --local user.email "dzun1999@gmail.com"
-          git config --local user.name "Sakura ne"
+          git config --local user.email "virusjalan86@gmail.com"
+          git config --local user.name "Asuna Chan"
           git add -A
           arr[0]="quote: 😂 If you let your head get too big, it’ll break your neck."
           arr[1]="quote: 😱 The road to success is dotted with many tempting parking spaces."
