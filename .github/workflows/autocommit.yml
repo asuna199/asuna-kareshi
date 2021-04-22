@@ -1,50 +1,43 @@
 name: Auto commit
-
 on:
-
   push:
     branches:
-      - master
-      
+      - main
   schedule:
-  - cron: "0 7,8,9,10,11 * * *"
-
+    - cron: '0 2,5,7,8,9,10,11,23 * * *'
 jobs:
-  auto_commit:
+  kang_commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v2
         with:
-         persist-credentials: false
-         fetch-depth: 0
-
-      - name: Modify last update
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Modify LAST_UPDATED file
         run: |
           d=`date '+%Y-%m-%dT%H:%M:%SZ'`
           echo $d > LAST_UPDATED
-          
       - name: Commit changes
         run: |
-          git config --local user.email "mazipanneh@gmail.com"
-          git config --local user.name "mazipan"
+          git config --local user.email "dzun1999@gmail.com"
+          git config --local user.name "Sakura ne"
           git add -A
-          
-          arr[0]="feat: 😂 auto commit"
-          arr[1]="feat: 😱 auto commit"
-          arr[2]="feat: 👿 auto commit"
-          arr[3]="feat: 💩 auto commit"
-          arr[4]="feat: 🙏 auto commit"
-          arr[5]="feat: 🙈 auto commit"
-          arr[6]="feat: 🐐 auto commit"
-          arr[7]="feat: 🚀 auto commit"
-          
+          arr[0]="quote: 😂 If you let your head get too big, it’ll break your neck."
+          arr[1]="quote: 😱 The road to success is dotted with many tempting parking spaces."
+          arr[2]="quote: 👿 A diamond is merely a lump of coal that did well under pressure."
+          arr[3]="quote: 💩 Women who seek to be equal with men lack ambition."
+          arr[4]="quote: 🙏 The best things in life are actually really expensive."
+          arr[5]="quote: 🙈 Bad decisions make good stories."
+          arr[6]="quote: 🐐 Dreams are like rainbows. Only idiots chase them."
+          arr[7]="quote: 🚀 If the world didn’t suck we’d all fly into space."
+          arr[8]="quote: 🕺 Always remember that you are unique – just like everybody else."
+          arr[9]="quote: 🎓 People say nothing is impossible, but I do nothing every day."
+          arr[10]="quote: 👒 You can’t have everything. Where would you put it?"
           rand=$[$RANDOM % ${#arr[@]}]
-          
           git commit -m "${arr[$rand]}"
-          
-      - name: GitHub Push
+      - name: Push Back
         uses: ad-m/github-push-action@v0.5.0
         with:
           force: true
-          directory: "."
+          directory: '.'
           github_token: ${{ secrets.GITHUB_TOKEN }}
